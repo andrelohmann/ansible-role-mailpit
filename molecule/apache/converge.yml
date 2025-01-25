@@ -1,6 +1,8 @@
 ---
 - name: Converge apache
   hosts: all
+  become: true
+  become_method: sudo
   vars:
     mailpit_smtp_port: 1025
     mailpit_web_port: 8025
