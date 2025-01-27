@@ -52,7 +52,7 @@
   ansible.builtin.get_url:
     url: https://github.com/axllent/mailpit/releases/download/v{{ mailpit_release }}/mailpit-linux-{{ deb_architecture[ansible_architecture] }}.tar.gz
     dest: /tmp/mailpit.tar.gz
-    mode: 0755
+    mode: "0755"
 
 - name: Unarchive mailpit
   ansible.builtin.unarchive:
@@ -66,14 +66,14 @@
     dest: /usr/local/bin/mailpit
     owner: mailpit
     group: mailpit
-    mode: 0755
+    mode: "0755"
     remote_src: true
 
 - name: Add mailpit systemd unit file
   ansible.builtin.template:
     src: mailpit.service
     dest: /etc/systemd/system/mailpit.service
-    mode: 0644
+    mode: "0644"
 
 - name: Just force systemd to reread configs
   ansible.builtin.systemd:
