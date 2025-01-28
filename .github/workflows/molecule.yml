@@ -28,7 +28,7 @@ jobs:
         ansible-lint .
 
     - name: Molecule
-      uses: gofrolist/molecule-action
+      uses: gofrolist/molecule-action@v2.7.50
       with:
         molecule_command: test --all
         molecule_args: -d docker
