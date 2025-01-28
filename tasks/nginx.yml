@@ -23,7 +23,7 @@
       dest: /etc/nginx/sites-available/mailpit.conf
       owner: root
       group: root
-      mode: 0644
+      mode: "0644"
 
   - name: Check for /etc/nginx/sites-enabled/mailpit.conf
     ansible.builtin.stat:

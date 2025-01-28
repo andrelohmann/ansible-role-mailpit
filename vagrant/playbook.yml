@@ -1,7 +1,8 @@
 ---
-- hosts: all
+- name: Install
+  hosts: all
   become: true
-  become_method: sudo
+  become_method: ansible.builtin.sudo
 
   vars:
     mailpit_smtp_port: 1025
@@ -12,6 +13,7 @@
     mailpit_proxy_domain: mail.mailpit.lokal
 
   roles:
-  - andrelohmann.root_colored_prompt
-  - ansible-role-mailpit
+  - name: andrelohmann.root_colored_prompt
+  - name: ansible-role-mailpit
+
 ...
