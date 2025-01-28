@@ -14,8 +14,7 @@ on:
 jobs:
   release:
     # if: github.event.pull_request.merged == true
-    # runs-on: ubuntu-latest
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
     - name: Checkout
       uses: actions/checkout@v3
@@ -45,4 +44,5 @@ jobs:
       with:
         galaxy_api_key: "${{ secrets.GALAXY_API_KEY }}"
         git_branch: main
+
 ...
