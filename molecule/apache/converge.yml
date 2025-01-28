@@ -10,7 +10,7 @@
     mailpit_proxy_apache: true
     mailpit_proxy_domain: mailpit.lokal
   tasks:
-  - name: "Include andrelohmann.mailpit"
-    include_role:
+  - name: Include andrelohmann.mailpit
+    ansible.builtin.include_role:
       name: "andrelohmann.mailpit"
 ...

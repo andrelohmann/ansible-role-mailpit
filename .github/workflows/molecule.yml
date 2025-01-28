@@ -12,14 +12,19 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v4
-      #with:
-      #  path: ${{ github.repository }}
+
+    - name: Create dummy role directory
+      run: |
+        mkdir -p vagrant/roles/${{ github.event.repository.name }}/tasks
+        touch vagrant/roles/${{ github.event.repository.name }}/tasks/main.yml
 
     - name: Run ansible-lint
       uses: ansible/ansible-lint@main
+      with:
+        args: "."
+        # working_directory: "."
 
     - name: YAML lint
-      #working-directory: ${{ github.repository }}
       run: |
         python -m pip install --upgrade pip
         pip install --user yamllint
@@ -30,8 +35,9 @@ jobs:
       uses: gofrolist/molecule-action@v2
       with:
         molecule_command: test --all
-      #  molecule_working_dir: ${{ github.repository }}
-      #env:
-      #  ANSIBLE_CONFIG: "${{ github.repository }}/ansible.cfg"
+        molecule_args: -d docker
+        molecule_working_dir: .
+      env:
+        ANSIBLE_FORCE_COLOR: '1'
 
 ...

@@ -8,7 +8,7 @@
     mailpit_web_port: 8025
     mailpit_release: latest
   tasks:
-  - name: "Include andrelohmann.mailpit"
-    include_role:
+  - name: Include andrelohmann.mailpit
+    ansible.builtin.include_role:
       name: "andrelohmann.mailpit"
 ...
