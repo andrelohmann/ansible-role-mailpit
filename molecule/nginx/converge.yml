@@ -2,7 +2,7 @@
 - name: Converge nginx
   hosts: all
   become: true
-  become_method: sudo
+  become_method: ansible.builtin.sudo
   vars:
     mailpit_smtp_port: 1025
     mailpit_web_port: 8025
