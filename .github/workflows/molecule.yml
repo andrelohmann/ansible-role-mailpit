@@ -24,7 +24,6 @@ jobs:
         pip install --user ansible ansible-lint yamllint
         # Install collections with user permissions
         ansible-galaxy collection install -r requirements.yml --collections-path ~/.ansible/collections
-        
 
     - name: Lint playbook
       working-directory: ${{ github.repository }}
