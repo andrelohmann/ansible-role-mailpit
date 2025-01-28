@@ -12,14 +12,14 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v4
-      with:
-        path: ${{ github.repository }}
+      #with:
+      #  path: ${{ github.repository }}
 
     - name: Run ansible-lint
       uses: ansible/ansible-lint@main
 
     - name: YAML lint
-      working-directory: ${{ github.repository }}
+      #working-directory: ${{ github.repository }}
       run: |
         python -m pip install --upgrade pip
         pip install --user yamllint
@@ -30,8 +30,8 @@ jobs:
       uses: gofrolist/molecule-action@v2
       with:
         molecule_command: test --all
-        molecule_working_dir: ${{ github.repository }}
-      env:
-        ANSIBLE_CONFIG: "${{ github.repository }}/ansible.cfg"
+      #  molecule_working_dir: ${{ github.repository }}
+      #env:
+      #  ANSIBLE_CONFIG: "${{ github.repository }}/ansible.cfg"
 
 ...
