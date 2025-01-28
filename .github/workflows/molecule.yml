@@ -11,32 +11,20 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         path: ${{ github.repository }}
 
-    - name: Prepare local Ansible config
-      working-directory: ${{ github.repository }}
-      run: |
-        mkdir -p collections
-        echo "[defaults]" > ansible.cfg
-        echo "collections_paths = ./collections:~/.ansible/collections" >> ansible.cfg
+    - name: Run ansible-lint
+      uses: ansible/ansible-lint@main
 
-    - name: Install dependencies
+    - name: YAML lint
       working-directory: ${{ github.repository }}
       run: |
         python -m pip install --upgrade pip
-        pip install --user ansible ansible-lint yamllint
-        ansible-galaxy collection install --force -r requirements.yml --collections-path ./collections
-
-    - name: Lint playbook
-      working-directory: ${{ github.repository }}
-      env:
-        ANSIBLE_CONFIG: "${{ github.repository }}/ansible.cfg"
-      run: |
+        pip install --user yamllint
         yamllint --version
         yamllint .
-        ansible-lint .
 
     - name: Molecule
       uses: gofrolist/molecule-action@v2
