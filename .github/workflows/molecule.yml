@@ -13,16 +13,10 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
 
-    - name: Create dummy role directory
-      run: |
-        mkdir -p vagrant/roles/${{ github.event.repository.name }}/tasks
-        touch vagrant/roles/${{ github.event.repository.name }}/tasks/main.yml
-
     - name: Run ansible-lint
       uses: ansible/ansible-lint@main
       with:
-        args: "."
-        # working_directory: "."
+        args: "--exclude vagrant/"
 
     - name: YAML lint
       run: |
