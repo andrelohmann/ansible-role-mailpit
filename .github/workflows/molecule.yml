@@ -21,11 +21,14 @@ jobs:
         python -m pip install --upgrade pip
         # Install packages with user permissions
         pip install --user ansible ansible-lint yamllint
+        mkdir -p ~/.ansible/collections
         # Install collections with user permissions
         ansible-galaxy collection install -r requirements.yml --collections-path ~/.ansible/collections
 
     - name: Lint playbook
       working-directory: ${{ github.repository }}
+      env:
+        ANSIBLE_COLLECTIONS_PATH: ~/.ansible/collections
       run: |
         yamllint --version
         yamllint .
@@ -38,5 +41,6 @@ jobs:
         molecule_args: -d docker
         molecule_working_dir: ${{ github.repository }}
       env:
-        ANSIBLE_FORCE_COLOR: '1'
+        ANSIBLE_COLLECTIONS_PATH: ~/.ansible/collections
+
 ...
